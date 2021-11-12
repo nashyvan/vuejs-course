@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div v-if="posts.length > 0">
     <h3>Posts list</h3>
-    <post-item v-for="post in posts" :post="post" />
+    <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)"/>
   </div>
+  <h2 v-else>
+    No posts yet
+  </h2>
 </template>
 
 <script>
@@ -20,10 +23,6 @@ export default {
 
 <style scoped>
 
-.post {
-  padding: 15px;
-  border: 2px solid gold;
-  margin-top: 15px;
-}
+
 
 </style>

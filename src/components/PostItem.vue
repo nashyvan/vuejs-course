@@ -1,7 +1,12 @@
 <template>
   <div class="post">
-    <div><b>Name: </b>{{ post.title }}</div>
-    <div><b>Description: </b>{{ post.body }}</div>
+    <div>
+      <div><b>Name: </b>{{ post.title }}</div>
+      <div><b>Description: </b>{{ post.body }}</div>
+    </div>
+    <div class="post__buttons">
+      <my-button @click="$emit('remove', post)">Remove</my-button>
+    </div>
   </div>
 </template>
 
@@ -16,6 +21,14 @@ export default {
 }
 </script>
 
-<style scoped>
 
+<style scoped>
+.post {
+  padding: 15px;
+  border: 2px solid gold;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>
