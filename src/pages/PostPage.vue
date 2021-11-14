@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Page with posts</h1>
-    <my-input v-model="searchQuery" placeholder="Search posts..."/>
+    <my-input v-focus v-model="searchQuery" placeholder="Search posts..."/>
     <div class="app__buttons">
       <my-button class="my-15px" @click="showDialog">Create post</my-button>
       <my-select :options="sortOptions" v-model="selectedSort"/>
@@ -11,7 +11,7 @@
     </my-dialog>
     <post-list :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading" />
     <div v-else>Loading...</div>
-    <div ref="observer" class="observer"></div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
     <!--    <div class="page__wrapper">-->
     <!--      <div class="page" v-for="pageNumber in totalPages" :key="pageNumber" :class="{'current-page': page === pageNumber}" @click="changePage(pageNumber)">{{ pageNumber }}</div>-->
     <!--    </div>-->
@@ -96,18 +96,17 @@ export default {
   },
   mounted() {
     this.fetchPosts()
-    console.log(this.$refs.observer)
-    let options = {
-      rootMargin: '0px',
-      threshold: 1.0
-    }
-    let callback = (entries, observer) => {
-      if (entries[0]. isIntersecting && this.page < this.totalPages) {
-        this.loadMorePosts()
-      }
-    }
-    let observer = new IntersectionObserver(callback, options)
-    observer.observe(this.$refs.observer )
+    // let options = {
+    //   rootMargin: '0px',
+    //   threshold: 1.0
+    // }
+    // let callback = (entries, observer) => {
+    //   if (entries[0]. isIntersecting && this.page < this.totalPages) {
+    //     this.loadMorePosts()
+    //   }
+    // }
+    // let observer = new IntersectionObserver(callback, options)
+    // observer.observe(this.$refs.observer)
   },
   computed: {
     sortedPosts() {

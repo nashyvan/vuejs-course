@@ -6,6 +6,7 @@
       <div><b>Description: </b>{{ post.body }}</div>
     </div>
     <div class="post__buttons">
+      <my-button @click="$router.push(`/posts/${post.id}`)">Open</my-button>
       <my-button @click="$emit('remove', post)">Remove</my-button>
     </div>
   </div>
@@ -31,5 +32,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.post__buttons {
+  display: flex;
 }
 </style>
